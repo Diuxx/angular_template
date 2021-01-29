@@ -19,6 +19,22 @@ import { MultiSelectModule } from 'primeng/multiselect';
 // external modules
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+// 1. Import the libs you need
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
+// 2. Add your credentials from step 1
+const config = {
+  apiKey: "AIzaSyAOY0jxe9YSwMtXQNv2IDa9vIkAhIKPT5I",
+  authDomain: "instaclone-a71d4.firebaseapp.com",
+  projectId: "instaclone-a71d4",
+  storageBucket: "instaclone-a71d4.appspot.com",
+  messagingSenderId: "682122708317",
+  appId: "1:682122708317:web:4f83b9cdecfd0039f714b4"
+};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +43,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   imports: [
     BrowserModule,
+    // 3. Initialize
+    AngularFireModule.initializeApp(config),
+    AngularFirestoreModule, // firestore
+    AngularFireAuthModule, // auth
+    AngularFireStorageModule, // storage
     AppRoutingModule,
     FormsModule,
     HttpClientModule,

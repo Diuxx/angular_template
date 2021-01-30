@@ -58,3 +58,10 @@
     width: 32px;
     z-index: 0;
 }
+
+
+// dialog
+
+:host ::ng-deep .p-dialog-top-right .p-dialog {
+    margin-top: 4rem;
+}

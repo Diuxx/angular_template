@@ -18,3 +18,9 @@ body {
 .flex {
     display: flex;
 }
+
+// override primeng p-field
+.p-field {
+    display: flex;
+    flex-direction: column;
+}

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import * as firebase from 'firebase';
+import { AuthService } from 'src/app/shared/services/Auth.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  isAuth: boolean;
+  signInDisplay: boolean = false;
+
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
   }
 
+  showSignInDialog() {
+    this.signInDisplay = true;
+  }
 }

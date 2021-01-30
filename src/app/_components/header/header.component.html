@@ -13,9 +13,22 @@
     </div>
     <div class="menu-sep"></div>
     <div class="user-icon">
-      <a role="button" tabindex="0" aria-expanded="false" aria-label="test">
+      <!--
+      <a role="button" tabindex="0" aria-expanded="false" aria-label="test" (click)="showSignInDialog()">
         <img class="" src="../../../assets/images/unnamed.jpg">
       </a>
+      -->
+      <p-avatar icon="pi pi-user" styleClass="p-mr-2" size="xlarge" shape="circle"></p-avatar>
+
     </div>
+
   </div>
 </div>
+
+<p-dialog 
+  position="top-right"
+  header="Login"
+  [(visible)]="signInDisplay"
+  [draggable]="false">
+  <app-sign-in></app-sign-in>
+</p-dialog>

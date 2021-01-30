@@ -30,12 +30,11 @@ export class AppInit {
         } else {
             // if not connected user is guest
             this.user = {
-                Id: 10,
-                Pseudo: 'test',
-                Mail: 'test@gmail.com',
-                Password: 'test',
-                Token: 'token',
-                Role: null
+                uid: 'string',
+                email: 'string',
+                displayName: 'string',
+                photoURL: 'string',
+                emailVerified: true,
             };
 
             // remove if exist user informations

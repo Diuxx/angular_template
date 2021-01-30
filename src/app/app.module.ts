@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './_routing/app-routing.module';
 
 // component
@@ -15,6 +15,10 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TooltipModule } from 'primeng/tooltip';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { DialogModule } from 'primeng/dialog';
+import { PasswordModule } from 'primeng/password';
+import { ButtonModule } from 'primeng/button';
+
 
 // external modules
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,6 +28,10 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { SignInComponent } from './_components/sign-in/sign-in.component';
+import { SignUpComponent } from './_components/sign-up/sign-up.component';
+
+import { AuthService } from './shared/services/Auth.service';
 
 // 2. Add your credentials from step 1
 const config = {
@@ -39,10 +47,13 @@ const config = {
   declarations: [
     AppComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    SignInComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     // 3. Initialize
     AngularFireModule.initializeApp(config),
     AngularFirestoreModule, // firestore
@@ -55,10 +66,16 @@ const config = {
     InputTextModule,
     TooltipModule,
     AutoCompleteModule,
-    MultiSelectModule
+    MultiSelectModule,
+    DialogModule,
+    PasswordModule,
+    ButtonModule,
+    AvatarModule,
+    AvatarGroupModule
   ],
   providers: [
-    AppInit
+    AppInit,
+    [AuthService],
   ],
   bootstrap: [ AppComponent ]
 })

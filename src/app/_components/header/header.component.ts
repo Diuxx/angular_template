@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
 import { AuthService } from 'src/app/shared/services/Auth.service';
 
@@ -9,15 +10,25 @@ import { AuthService } from 'src/app/shared/services/Auth.service';
 })
 export class HeaderComponent implements OnInit {
 
+  // variables
   isAuth: boolean;
   signInDisplay: boolean = false;
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    public authService: AuthService,
+    private afs: AngularFirestore
+  ) { }
 
   ngOnInit() {
+    this.isAuth = this.authService.isLoggedIn;
+    if(!this.isAuth) {
+      this.signInDisplay = true ;
+    } else {
+      console.log(this.authService.getUserData());
+    }
   }
 
-  showSignInDialog() {
+  public showSignInDialog(): void {
     this.signInDisplay = true;
   }
 }

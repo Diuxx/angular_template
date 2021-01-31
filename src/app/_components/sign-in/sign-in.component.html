@@ -1,15 +1,25 @@
 <div class="content">
+  <!-- form -->
   <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+    <!-- Email field -->
     <div class="p-field">
       <label for="login">Email</label>
       <input id="login" type="username" formControlName="login" aria-describedby="login-help" pInputText />
+      <small *ngIf="getLogin()?.errors?.required && getLogin().touched" id="loginErr" class="p-error">Email address is required.</small>
+      <small *ngIf="getLogin()?.errors?.email && getLogin().touched" id="loginErr" class="p-error">Wrong email address format.</small>
     </div>
+    <!-- Password field -->
     <div class="p-field">
       <label for="password">Password</label>
-      <input id="password" type="password" formControlName="password" (feedback)="false" pPassword />
+      <input id="password" type="password" formControlName="password" [feedback]="false" pPassword />
+      <small *ngIf="getPassword()?.errors?.required && getPassword().touched" id="loginErr" class="p-error">Password is required.</small>
     </div>
     <div class="p-field">
-      <button pButton pRipple type="button" label="Sign-in" class="p-button-raised" (click)="onSubmit()"></button>
+      <small *ngIf="authService.hasLoginErr" id="loginErr" class="p-error">{{ authService.loginErr }}</small>
+    </div>
+    <!-- Submit -->
+    <div class="p-field">
+      <button pButton pRipple type="button" [disabled]="!canSubmit()" label="Sign-in" class="p-button-raised" (click)="onSubmit()"></button>
     </div>
   </form>
 </div>

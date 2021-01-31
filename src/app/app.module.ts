@@ -18,7 +18,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { DialogModule } from 'primeng/dialog';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
-
+import { AvatarModule } from 'primeng/avatar';
+import { AvatarGroupModule } from 'primeng/avatargroup';
 
 // external modules
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -30,6 +31,8 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { SignInComponent } from './_components/sign-in/sign-in.component';
 import { SignUpComponent } from './_components/sign-up/sign-up.component';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+
 
 import { AuthService } from './shared/services/Auth.service';
 
@@ -71,7 +74,8 @@ const config = {
     PasswordModule,
     ButtonModule,
     AvatarModule,
-    AvatarGroupModule
+    AvatarGroupModule,
+    OverlayPanelModule
   ],
   providers: [
     AppInit,

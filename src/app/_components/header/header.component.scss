@@ -70,3 +70,7 @@
 :host ::ng-deep .p-dialog-top-right .p-dialog {
     margin-top: 4rem;
 }
+
+:host ::ng-deep .p-dialog .p-dialog-content {
+    padding-bottom: 1rem;
+}

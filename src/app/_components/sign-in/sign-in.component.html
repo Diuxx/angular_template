@@ -22,5 +22,18 @@
       <button pButton pRipple type="button" [disabled]="!canSubmit()" label="Sign-in" class="p-button-raised" (click)="onSubmit()"></button>
     </div>
   </form>
+
+  <div class="login-alternatives">
+    <small>Or login with</small>
+    <div class="p-field">
+      <button pButton pRipple type="button" icon="pi pi-facebook" label="FaceBook" class="p-button-outlined p-button-sm p-button-secondary"></button>
+      <button pButton pRipple type="button" icon="pi pi-google" label="Google" class="p-button-outlined p-button-sm p-button-secondary"></button>
+    </div>
+  </div>
+
+  <div class="sign-up">
+    <small>Not a member? <a class="sign-up-button" role="button">Sign-up now</a></small>
+  </div>
+
 </div>
 

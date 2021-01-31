@@ -5,3 +5,34 @@
     width: 325px;
     max-width: 325px;
 }
+
+.login-alternatives, .sign-up {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    small {
+        width: fit-content;
+    }
+}
+
+.login-alternatives .p-field {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    button {
+        max-width: 120px;
+        width: 120px;
+    }
+}
+
+.sign-up-button {
+    border-bottom: 1px $grey dotted;
+    cursor: pointer;
+}
+
+.sign-up-button:hover {
+    border-bottom: 1px $grey solid;
+}

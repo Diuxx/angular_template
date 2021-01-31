@@ -54,10 +54,11 @@ export class AuthService {
   SignIn(email: string, password: string) {
     return this.afAuth.signInWithEmailAndPassword(email, password)
       .then((result) => {
-        this.ngZone.run(() => {
-          this.router.navigate(['home']);
-        });
         this.SetUserData(result.user);
+        this.ngZone.run(() => {
+          // this.router.navigate(['home']);
+          window.location.reload();
+        });
       }).catch((error) => {
         this._hasLoginErr = true;
         this.loginErr = "You have entered an invalid username or password";//error.message;
@@ -82,7 +83,7 @@ export class AuthService {
   SignOut() {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
-      this.router.navigate(['home']);
+      window.location.reload();
     })
   }
 

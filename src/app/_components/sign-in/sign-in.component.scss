@@ -1,11 +1,5 @@
 @import '../../../assets/color-config.scss';
 
-.content {
-    display: block;
-    width: 325px;
-    max-width: 325px;
-}
-
 .login-alternatives, .sign-up {
     display: flex;
     flex-direction: column;

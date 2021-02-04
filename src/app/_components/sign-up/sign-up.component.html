@@ -1,3 +1,33 @@
-<p>
-  sign-up works!
-</p>
+<div class="sign-content">
+  <!-- form -->
+  <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+    <div class="p-field">
+      <label for="displayName">Pseudo</label>
+      <input id="displayName" type="username" formControlName="displayName" aria-describedby="displayName-help" pInputText />
+    </div>
+    <div class="p-field">
+      <label for="email">Email</label>
+      <input id="email" type="email" formControlName="email" aria-describedby="email-help" pInputText />
+    </div>
+    <div class="p-field">
+      <label for="password">Password</label>
+      <input id="password" type="password" formControlName="password" [feedback]="false" pPassword />
+    </div>
+    <div class="p-field">
+      <label for="confirmPassword">Confirm Password</label>
+      <input id="confirmPassword" type="confirmPassword" formControlName="confirmPassword" [feedback]="false" pPassword />
+    </div>
+    <!-- Submit -->
+    <div class="p-field">
+      <button pButton pRipple type="button" [disabled]="!canSubmit()" label="Sign-up" class="p-button-raised t-b-blue" (click)="onSubmit()"></button>
+    </div>
+  </form>
+
+  <div class="sign-in">
+    <small>Already registered? 
+      <a class="sign-in-button" role="button" (click)="displaySignIn()">Sign-in now</a></small>
+  </div>
+
+</div>
+
+

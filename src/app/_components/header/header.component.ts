@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
   // variables
   isAuth: boolean;
   signInDisplay: boolean = false;
+  signUpDisplay: boolean = false;
 
   constructor(
     public authService: AuthService,
@@ -28,7 +29,16 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  /* display signIn dialog */
   public showSignInDialog(): void {
     this.signInDisplay = true;
+  }
+
+  /* display signUp dialog */
+  public showSignUpDialog(): void {
+    if(this.signInDisplay === true) {
+      this.signInDisplay = false;
+    }
+    this.signUpDisplay = true;
   }
 }

@@ -43,5 +43,13 @@
   header="Login"
   [(visible)]="signInDisplay"
   [draggable]="false">
-  <app-sign-in></app-sign-in>
+  <app-sign-in (displaySignUpEvent)="showSignUpDialog()" ></app-sign-in>
+</p-dialog>
+
+<p-dialog 
+  position="top-right"
+  header="Sign-up"
+  [(visible)]="signUpDisplay"
+  [draggable]="false">
+  <app-sign-up></app-sign-up>
 </p-dialog>

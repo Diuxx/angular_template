@@ -24,3 +24,13 @@ body {
     display: flex;
     flex-direction: column;
 }
+
+.sign-content {
+    display: block;
+    width: 325px;
+    max-width: 325px;
+}
+
+:host ::ng-deep p-button.t-b-blue {
+    background-color: $blue;
+}

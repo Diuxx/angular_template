@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AbstractControl, FormBuilder, FormControl, ValidationErrors, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/shared/services/Auth.service';
@@ -11,6 +11,8 @@ import { AuthService } from 'src/app/shared/services/Auth.service';
 })
 export class SignInComponent implements OnInit {
 
+  private emailRegEx: string = '^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
+
   public checkoutForm = this.formBuilder.group({
     login: new FormControl('', [
       Validators.email,
@@ -21,7 +23,8 @@ export class SignInComponent implements OnInit {
     ])
   });
 
-  private emailRegEx: string = '^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
+  // child event
+  @Output() displaySignUpEvent = new EventEmitter<void>();
 
   constructor(
     public authService: AuthService,
@@ -45,6 +48,8 @@ export class SignInComponent implements OnInit {
     return (this.getLogin().errors?.required || this.getLogin().errors?.email || this.getPassword().errors?.required) ? false : true;
   }
 
+  /**
+   * Submit auth form */
   public onSubmit(): void {
     // checkout data here
     console.warn('login submitted', this.checkoutForm.value);
@@ -58,6 +63,13 @@ export class SignInComponent implements OnInit {
       this.checkoutForm.value.login,
       this.checkoutForm.value.password
     );
+  }
+
+  public displaySignUp(): void {
+    if(this.displaySignUpEvent.observers.length > 0)
+    { 
+      this.displaySignUpEvent.emit();
+    }
   }
 
 }

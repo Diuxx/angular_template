@@ -1,4 +1,4 @@
-<div class="content">
+<div class="sign-content">
   <!-- form -->
   <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
     <!-- Email field -->
@@ -19,7 +19,7 @@
     </div>
     <!-- Submit -->
     <div class="p-field">
-      <button pButton pRipple type="button" [disabled]="!canSubmit()" label="Sign-in" class="p-button-raised" (click)="onSubmit()"></button>
+      <button pButton pRipple type="button" [disabled]="!canSubmit()" label="Sign-in" class="p-button-raised t-b-blue" (click)="onSubmit()"></button>
     </div>
   </form>
 
@@ -32,7 +32,7 @@
   </div>
 
   <div class="sign-up">
-    <small>Not a member? <a class="sign-up-button" role="button">Sign-up now</a></small>
+    <small>Not a member? <a class="sign-up-button" role="button" (click)="displaySignUp()">Sign-up now</a></small>
   </div>
 
 </div>

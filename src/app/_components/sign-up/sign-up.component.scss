@@ -1,0 +1,19 @@
+@import '../../../assets/color-config.scss';
+
+.sign-in {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    small {
+        width: fit-content;
+    }
+}
+
+.sign-in-button {
+    border-bottom: 1px $grey dotted;
+    cursor: pointer;
+}
+
+.sign-in-button:hover {
+    border-bottom: 1px $grey solid;
+}

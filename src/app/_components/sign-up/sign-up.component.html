@@ -11,11 +11,20 @@
     </div>
     <div class="p-field">
       <label for="password">Password</label>
-      <input id="password" type="password" formControlName="password" [feedback]="false" pPassword />
+      <input id="password" type="password" formControlName="password" [feedback]="true" pPassword />
+      <small *ngIf="password?.errors?.minlength" id="passwordLengthErr" class="p-error">
+        {{ passwordLengthConsign }}
+      </small>
+      <small *ngIf="password?.errors?.pattern" id="passwordPatternErr" class="p-error">
+        {{ passwordConsign }}
+      </small>
     </div>
     <div class="p-field">
       <label for="confirmPassword">Confirm Password</label>
-      <input id="confirmPassword" type="confirmPassword" formControlName="confirmPassword" [feedback]="false" pPassword />
+      <input id="confirmPassword" type="password" formControlName="confirmPassword" [feedback]="false" pPassword />
+      <small *ngIf="confirmPassword?.errors?.passwordNotEquivalent" id="confirmPasswordErr" class="p-error">
+        Passwords did not match.
+      </small>
     </div>
     <!-- Submit -->
     <div class="p-field">

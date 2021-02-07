@@ -51,15 +51,11 @@ export class SignInComponent implements OnInit {
   /**
    * Submit auth form */
   public onSubmit(): void {
-    // checkout data here
-    console.warn('login submitted', this.checkoutForm.value);
-    console.log(this.checkoutForm.valid);
-
-    // fields not valid
-    if(!this.checkoutForm.valid) return;
+    // fields not valids
+    if(!this.checkoutForm.valid) return; 
 
     // auth
-    let test: any = this.authService.SignIn(
+    this.authService.SignIn(
       this.checkoutForm.value.login,
       this.checkoutForm.value.password
     );

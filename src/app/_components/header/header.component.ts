@@ -31,6 +31,9 @@ export class HeaderComponent implements OnInit {
 
   /* display signIn dialog */
   public showSignInDialog(): void {
+    if(this.signUpDisplay) {
+      this.signUpDisplay = false;
+    }
     this.signInDisplay = true;
   }
 

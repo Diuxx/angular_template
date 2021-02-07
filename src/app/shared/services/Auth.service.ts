@@ -16,7 +16,13 @@ export class AuthService {
     return this._hasLoginErr;
   }
 
+  private _hasRegisterErr : boolean;
+  public get hasRegisterErr() : boolean {
+    return this._hasLoginErr;
+  }
+
   public loginErr: string;
+  public registerErr: string;
 
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
@@ -56,12 +62,11 @@ export class AuthService {
       .then((result) => {
         this.SetUserData(result.user);
         this.ngZone.run(() => {
-          // this.router.navigate(['home']);
           window.location.reload();
         });
       }).catch((error) => {
         this._hasLoginErr = true;
-        this.loginErr = "You have entered an invalid username or password";//error.message;
+        this.loginErr = "You have entered an invalid username or password.";//error.message;
         // console.warn('login fail:', error);
       })
   }
@@ -75,6 +80,8 @@ export class AuthService {
         // this.SendVerificationMail();
         this.SetUserData(result.user);
       }).catch((error) => {
+        this._hasRegisterErr = true;
+        this.registerErr = "An error occurred while sign up."
         window.alert(error.message)
       })
   }

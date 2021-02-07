@@ -39,6 +39,7 @@
 </p-overlayPanel>
 
 <p-dialog 
+  [maximizable]="true"
   position="top-right"
   header="Login"
   [(visible)]="signInDisplay"
@@ -51,5 +52,5 @@
   header="Sign-up"
   [(visible)]="signUpDisplay"
   [draggable]="false">
-  <app-sign-up></app-sign-up>
+  <app-sign-up (displaySignInEvent)="showSignInDialog()"></app-sign-up>
 </p-dialog>

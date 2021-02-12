@@ -32,7 +32,7 @@ export class AuthService {
 
   constructor(
     public afs: AngularFirestore,   // Inject Firestore service
-    public afAuth: AngularFireAuth, // Inject Firebase auth service
+    public afAuth: AngularFireAuth, // Inject Firebase auth 
     public router: Router,  
     public ngZone: NgZone // NgZone service to remove outside scope warning
   ) {
@@ -66,9 +66,8 @@ export class AuthService {
         });
       }).catch((error) => {
         this._hasLoginErr = true;
-        this.loginErr = "You have entered an invalid username or password.";//error.message;
-        // console.warn('login fail:', error);
-      })
+        this.loginErr = "You have entered an invalid username or password.";
+      });
   }
 
   // Sign up with email/password
@@ -80,10 +79,18 @@ export class AuthService {
         // this.SendVerificationMail();
         this.SetUserData(result.user);
       }).catch((error) => {
+        console.log('err', error);
         this._hasRegisterErr = true;
-        this.registerErr = "An error occurred while sign up."
-        window.alert(error.message)
+        if(error.code === 'auth/email-already-in-use') {
+          this.registerErr = error.message;
+        } else {
+          this.registerErr = "An error occurred while sign up.";
+        }
       })
+  }
+
+  // update user profile
+  UpdateProfile(user: User) {
   }
 
   // Sign out 

@@ -60,7 +60,8 @@ export class SignUpComponent implements OnInit {
   }
 
   /**
-   * Submit auth form */
+   * Submit auth form 
+   */
   public onSubmit(): void {
     // fields not valids
     if(!this.checkoutForm.valid) return;
@@ -73,11 +74,15 @@ export class SignUpComponent implements OnInit {
   }
 
   /**
-   * User can send the form or not */
+   * User can send the form or not 
+   */
   public canSubmit(): boolean {
     return (!this.displayName.errors && !this.email.errors && !this.password.errors && !this.confirmPassword.errors);
   }
 
+  /**
+   * 
+   */
   public displaySignIn(): void {
     if(this.displaySignInEvent.observers.length > 0)
     { 

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Post } from 'src/app/_models/post';
+import { PostService } from 'src/app/_services/post.service';
 
 @Component({
   selector: 'app-home',
@@ -11,21 +13,10 @@ export class HomeComponent implements OnInit {
   public search: string;
   public autoCompleteResults: string[];
 
-  public filters: boolean = false;
-
-  // style triggers
-  public hover_filter_button: boolean = false;
-
   constructor(
   ) { }
 
   ngOnInit() {
-  }
 
-  /**
-   * 
-   */
-  public toggleFilter(): void {
-    this.filters = !this.filters;
   }
 }

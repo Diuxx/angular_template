@@ -8,6 +8,6 @@ import { AbstractService } from './abstract.service';
 export class PostService extends AbstractService{
 
   constructor(http: HttpClient) {
-    super(http, 'post');
+    super(http, 'posts');
   }
 }

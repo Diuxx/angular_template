@@ -1,0 +1,75 @@
+@import '../../../../assets/color-config.scss';
+
+:host {
+    display: flex;
+    justify-content: center;
+}
+
+.add-like {
+    // background: url("");
+    background-image: url(../../../../assets/images/add-like.svg);
+    background-size: contain;
+    width: 20px;
+    height: 20px;
+    filter: invert(92%) sepia(7%) saturate(188%) hue-rotate(161deg) brightness(86%) contrast(85%);
+    transition: width 200ms, height 200ms;
+    cursor: pointer;
+    &:hover {
+        filter: invert(43%) sepia(98%) saturate(3437%) hue-rotate(340deg) brightness(96%) contrast(89%);
+        width: 24px;
+        height: 24px;
+    }
+}
+
+.remove-like {
+    // background: url("");
+    background-image: url(../../../../assets/images/remove-like.svg);
+    background-size: contain;
+    width: 20px;
+    height: 20px;
+    filter: invert(43%) sepia(98%) saturate(3437%) hue-rotate(340deg) brightness(96%) contrast(89%);
+    transition: width 200ms, height 200ms;
+    cursor: pointer;
+    &:hover {
+        filter: invert(92%) sepia(7%) saturate(188%) hue-rotate(161deg) brightness(86%) contrast(85%);
+        width: 16px;
+        height: 16px;
+    }
+
+}
+
+.post {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    justify-content: center;
+    gap: 5px;
+}
+
+.post .header {
+    width: 180px;
+    height: 240px;
+    background: black;
+}
+
+.post .content {
+    width: 180px;
+    max-height: 30px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.post .footer {
+    width: 180px;
+    max-height: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+    .i {
+        font-size: 2rem;
+        color: red;
+        cursor: text;
+    }
+}

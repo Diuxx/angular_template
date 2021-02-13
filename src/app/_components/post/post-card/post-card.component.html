@@ -1,0 +1,11 @@
+<div class="post">
+  <div class="header"></div>
+  <div class="content">
+    {{ post.Content }}
+  </div>
+  <div class="footer">
+    <i>likes : {{ likeCount }}</i>
+    <i *ngIf="!licked" class="add-like" (click)="like()" pTooltip="Like the post" tooltipPosition="top"></i>
+    <i *ngIf="licked" class="remove-like" (click)="unlike()" pTooltip="Remove your like" tooltipPosition="top"></i>
+  </div>
+</div>

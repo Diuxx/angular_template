@@ -9,6 +9,9 @@ import { AppInit } from 'src/app/_core/init/appInit';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './_components/home/home.component';
 import { HeaderComponent } from './_components/header/header.component';
+import { PostComponent } from './_components/post/post.component';
+import { PostCardComponent } from './_components/post/post-card/post-card.component';
+import { PostDialogComponent } from './_components/post/postDialog/postDialog.component';
 
 // primeng component
 import { InputTextModule } from 'primeng/inputtext';
@@ -20,6 +23,8 @@ import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
+import { BadgeModule } from 'primeng/badge';
+import { EditorModule } from 'primeng/editor';
 
 // external modules
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -32,7 +37,6 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { SignInComponent } from './_components/sign-in/sign-in.component';
 import { SignUpComponent } from './_components/sign-up/sign-up.component';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
-
 
 import { AuthService } from './shared/services/Auth.service';
 
@@ -52,7 +56,10 @@ const config = {
     HomeComponent,
     HeaderComponent,
     SignInComponent,
-    SignUpComponent
+    SignUpComponent,
+    PostComponent,
+    PostCardComponent,
+    PostDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +82,9 @@ const config = {
     ButtonModule,
     AvatarModule,
     AvatarGroupModule,
-    OverlayPanelModule
+    OverlayPanelModule,
+    BadgeModule,
+    EditorModule
   ],
   providers: [
     AppInit,

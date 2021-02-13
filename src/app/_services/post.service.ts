@@ -5,7 +5,7 @@ import { AbstractService } from './abstract.service';
 @Injectable({
   providedIn: 'root'
 })
-export class PostService extends AbstractService{
+export class PostService extends AbstractService {
 
   constructor(http: HttpClient) {
     super(http, 'posts');

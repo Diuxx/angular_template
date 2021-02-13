@@ -13,6 +13,9 @@ import { PostComponent } from './_components/post/post.component';
 import { PostCardComponent } from './_components/post/post-card/post-card.component';
 import { PostDialogComponent } from './_components/post/postDialog/postDialog.component';
 
+// template component
+import { FormComponent } from './_components/form/form.component';
+
 // primeng component
 import { InputTextModule } from 'primeng/inputtext';
 import { TooltipModule } from 'primeng/tooltip';
@@ -25,6 +28,7 @@ import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 import { BadgeModule } from 'primeng/badge';
 import { EditorModule } from 'primeng/editor';
+import { FileUploadModule } from 'primeng/fileupload';
 
 // external modules
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -40,6 +44,9 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 import { AuthService } from './shared/services/Auth.service';
 
+// pipe
+import { SafeHtmlPipe } from './_pipes/safe-html.pipe';
+
 // 2. Add your credentials from step 1
 const config = {
   apiKey: "AIzaSyAOY0jxe9YSwMtXQNv2IDa9vIkAhIKPT5I",
@@ -52,11 +59,13 @@ const config = {
 
 @NgModule({
   declarations: [
+    SafeHtmlPipe,
     AppComponent,
     HomeComponent,
     HeaderComponent,
     SignInComponent,
     SignUpComponent,
+    FormComponent,
     PostComponent,
     PostCardComponent,
     PostDialogComponent
@@ -84,7 +93,8 @@ const config = {
     AvatarGroupModule,
     OverlayPanelModule,
     BadgeModule,
-    EditorModule
+    EditorModule,
+    FileUploadModule
   ],
   providers: [
     AppInit,

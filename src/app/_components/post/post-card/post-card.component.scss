@@ -44,19 +44,26 @@
     width: fit-content;
     justify-content: center;
     gap: 5px;
+    box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
+    border-radius: 3px;
+    padding: 5px;
 }
 
 .post .header {
     width: 180px;
-    height: 240px;
-    background: black;
+    img {
+        width: inherit;
+    }
 }
 
 .post .content {
     width: 180px;
     max-height: 30px;
-    margin-left: 5px;
-    margin-right: 5px;
+}
+
+.post .content p {
+    margin: 0;
+    font-size: 10px;
 }
 
 .post .footer {

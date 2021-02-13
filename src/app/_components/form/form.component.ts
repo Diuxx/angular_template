@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/shared/services/Auth.service';
 export class FormComponent implements OnInit {
 
   // variables
-  public formCheckout: FormGroup;
+  public formCheckout: FormGroup = null;
 
   constructor(
     protected formBuilder: FormBuilder,
@@ -43,9 +43,8 @@ export class FormComponent implements OnInit {
   /**
    * This methode must be overrided by component who extend this component.
    */
-  private sendData(): void {
+  protected sendData(): void {
     console.log('sending data...');
     return;
   }
-
 }

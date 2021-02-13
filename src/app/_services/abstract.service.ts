@@ -38,7 +38,29 @@ export abstract class AbstractService {
         }): Observable<T[]> {
         const options = { headers: new HttpHeaders(values) };
         return this.http.get<T[]>(`${environment.api}/${this.uri}`, options);
-    } 
+    }
+
+    /**
+     * Post a data to api
+     * @param data data to send
+     */
+    public post<T>(data: T): Observable<T> {
+        return this.http.post<T>(`${environment.api}/${this.uri}`, data);
+    }
+
+    /**
+     * Post a data from uuri & add headers data
+     * @param data data to send
+     * @param value header content to add
+     */
+    public postWithHeader<T>(
+        data: T, 
+        values: { 
+            [key: string]: any 
+        }): Observable<T> {
+        const options = { headers: new HttpHeaders(values) };
+        return this.http.post<T>(`${environment.api}/${this.uri}`, data, options);
+    }
 
     /**
      * Return options needed for api call

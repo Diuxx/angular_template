@@ -1,3 +1,6 @@
-<p>
-  form works!
-</p>
+<div class="form-content">
+    <!-- form -->
+    <form [formGroup]='formCheckout' (ngSubmit)="submit()">
+        <ng-content></ng-content>
+    </form>
+</div>

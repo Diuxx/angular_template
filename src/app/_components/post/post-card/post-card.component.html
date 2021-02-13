@@ -1,8 +1,8 @@
 <div class="post">
-  <div class="header"></div>
-  <div class="content">
-    {{ post.Content }}
+  <div *ngIf="post?.ImgUrl" class="header">
+    <img class="fit-picture" src="{{ post.ImgUrl }}" alt="Sorry! Image not available at this time">
   </div>
+  <div class="content" [innerHTML]="post.Content | safeHtml"></div>
   <div class="footer">
     <i>likes : {{ likeCount }}</i>
     <i *ngIf="!licked" class="add-like" (click)="like()" pTooltip="Like the post" tooltipPosition="top"></i>

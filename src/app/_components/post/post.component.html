@@ -13,5 +13,5 @@
   header="New Post"
   [(visible)]="postDialog"
   [draggable]="false">
-  <app-postDialog></app-postDialog>
+  <app-postDialog (postHasBeenUploaded)="refeshPostList()"></app-postDialog>
 </p-dialog>

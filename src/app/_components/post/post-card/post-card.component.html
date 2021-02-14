@@ -4,8 +4,8 @@
   </div>
   <div class="content" [innerHTML]="post.Content | safeHtml"></div>
   <div class="footer">
-    <i>likes : {{ likeCount }}</i>
-    <i *ngIf="!licked" class="add-like" (click)="like()" pTooltip="Like the post" tooltipPosition="top"></i>
-    <i *ngIf="licked" class="remove-like" (click)="unlike()" pTooltip="Remove your like" tooltipPosition="top"></i>
+    <div class="likes">likes : <b>{{ post.likes }}</b></div>
+    <i *ngIf="!post.didILikeIt" class="add-like" (click)="like()" pTooltip="Like the post" tooltipPosition="top"></i>
+    <i *ngIf="post.didILikeIt" class="remove-like" (click)="unlike()" pTooltip="Remove your like" tooltipPosition="top"></i>
   </div>
 </div>

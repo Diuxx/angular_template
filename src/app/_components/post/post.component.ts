@@ -41,6 +41,9 @@ export class PostComponent implements OnInit {
       ).subscribe(posts => {
         this.posts = posts.sort((a, b) => new Date(a.UpdatedAt).getTime() - new Date(b.UpdatedAt).getTime());;
         this.posts.reverse();
+
+        console.log('posts', this.posts)
+
         this.cd.markForCheck();
       },
       err => {

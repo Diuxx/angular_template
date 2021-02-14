@@ -63,6 +63,28 @@ export abstract class AbstractService {
     }
 
     /**
+     * Delete a data from uri with id
+     * @param id id of element to delete
+     */
+    public delete<T>(id: string): Observable<T> {
+        return this.http.delete<T>(`${environment.api}/${this.uri}/${id}`);
+    }
+
+    /**
+     * Delete a data from uri with id
+     * @param id id of element to delet
+     * @param values header content to add
+     */
+    public deleteWithHeader<T>(
+        id: string, 
+        values: { 
+            [key: string]: any 
+        }): Observable<T> {
+        const options = { headers: new HttpHeaders(values) };
+        return this.http.delete<T>(`${environment.api}/${this.uri}/${id}`, options);
+    }
+
+    /**
      * Return options needed for api call
      * @param verb verb to override in call */
     getOptions(verb: string) {

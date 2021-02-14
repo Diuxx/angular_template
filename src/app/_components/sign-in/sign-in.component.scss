@@ -1,5 +1,10 @@
 @import '../../../assets/color-config.scss';
 
+:host ::ng-deep .form-content {
+    width: 325px;
+    max-width: 325px;
+}
+
 .login-alternatives, .sign-up {
     display: flex;
     flex-direction: column;

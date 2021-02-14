@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Post } from 'src/app/_models/post';
-import { PostService } from 'src/app/_services/post.service';
+import { AuthService } from 'src/app/shared/services/Auth.service';
 
 @Component({
   selector: 'app-home',
@@ -14,9 +13,16 @@ export class HomeComponent implements OnInit {
   public autoCompleteResults: string[];
 
   constructor(
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
+  }
 
+  /**
+   * Check if user is loggedIn
+   */
+  public isUserLoggedIn(): boolean {
+    return this.authService.isLoggedIn;
   }
 }

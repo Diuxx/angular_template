@@ -78,6 +78,9 @@ export class AuthService {
         up and returns promise */
         // this.SendVerificationMail();
         this.SetUserData(result.user);
+        this.ngZone.run(() => {
+          window.location.reload();
+        });
       }).catch((error) => {
         console.log('err', error);
         this._hasRegisterErr = true;

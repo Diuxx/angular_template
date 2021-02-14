@@ -24,8 +24,6 @@ export class HeaderComponent implements OnInit {
     this.isAuth = this.authService.isLoggedIn;
     if(!this.isAuth) {
       this.signInDisplay = true ;
-    } else {
-      console.log(this.authService.getUserData());
     }
   }
 

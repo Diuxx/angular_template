@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core'
 import { AuthService } from 'src/app/shared/services/Auth.service';
 import { Like } from 'src/app/_models/like';
@@ -17,6 +17,10 @@ export class PostCardComponent implements OnInit {
 
   // variables
   private userdata: any = null;
+
+  // output
+  @Output() liked = new EventEmitter<Post>();
+  @Output() unliked = new EventEmitter<Post>();
 
   constructor(
     private likeService: LikeService,
@@ -38,12 +42,17 @@ export class PostCardComponent implements OnInit {
       FireBaseId: this.authService.getUserData().uid
     };
 
-    // send like
+    // send liked
     this.likeService.postWithHeader<Like>(like, this.userdata)
     .subscribe(l => {
-      console.log('liked', this.post);
       this.post.didILikeIt = l.Id; // add like id
-      this.post.likes++;
+      // this.post.likes++; 
+      // with socket i will recieve a broadcast and at this moment i will increment the likes
+
+      if(this.liked.observers.length > 0)
+      {
+        this.liked.emit(this.post);
+      }
     }, err => {
       console.log(err);
     });
@@ -61,9 +70,14 @@ export class PostCardComponent implements OnInit {
     // remove like
     this.likeService.deleteWithHeader<Like>(this.post.didILikeIt, this.userdata)
     .subscribe(l => {
-      console.log('unLiked', this.post);
       this.post.didILikeIt = null;
-      this.post.likes--;
+      // this.post.likes--;
+      // with socket i will recieve a broadcast and at this moment i will decrement the likes
+
+      if(this.unliked.observers.length > 0)
+      {
+        this.unliked.emit(this.post);
+      }
     }, err => {
       console.log(err);
     });

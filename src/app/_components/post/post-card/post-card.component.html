@@ -1,4 +1,14 @@
-<div class="post">
+<div class="post" >
+  <div class="post-navigation">
+    <button pButton pRipple 
+      *ngIf="isMyPost()"
+      type="button"
+      icon="pi pi-times"
+      class="p-button-rounded p-button-danger delete-button"
+      (click)="deletePost()"
+      pTooltip="Delete post">
+    </button>
+  </div>
   <div *ngIf="post?.ImgUrl" class="header">
     <img class="fit-picture" src="{{ post.ImgUrl }}" alt="Sorry! Image not available at this time">
   </div>

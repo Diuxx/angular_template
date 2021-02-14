@@ -51,7 +51,8 @@ export class SignUpComponent extends FormComponent implements OnInit {
     // register
     this.authService.SignUp(
       this.email.value,
-      this.confirmPassword.value
+      this.confirmPassword.value,
+      this.displayName.value,
     );
   }
 

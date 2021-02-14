@@ -21,7 +21,7 @@ export class PostDialogComponent extends FormComponent implements OnInit {
   @ViewChild('postImgFileUpload') postImgFileUpload: FileUpload;
 
   // output
-  @Output() postHasBeenUploaded = new EventEmitter<void>();
+  @Output() postHasBeenUploaded = new EventEmitter<Post>();
 
   constructor(
     formBuilder: FormBuilder,
@@ -49,15 +49,17 @@ export class PostDialogComponent extends FormComponent implements OnInit {
     let post: Post = new Post();
     post.Content = this.formCheckout.controls.post.value;
     post.ImgUrl = this.formCheckout.controls.imgUrl.value;
-    console.log('post', post);
+    // console.log('post', post);
 
     this.postService.postWithHeader<Post>(
       post, 
-      { 'userData': JSON.stringify(this.authService.getUserData()) }).subscribe(p => {
+      { 'userData': JSON.stringify(this.authService.getUserData()) })
+      .subscribe(p => {
         // clear data..
         this.clearData();
         if (this.postHasBeenUploaded.observers.length > 0) {
-          this.postHasBeenUploaded.emit();
+          console.log(p);
+          this.postHasBeenUploaded.emit(p);
         }
       }, err => {
         console.log(err);

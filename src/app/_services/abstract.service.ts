@@ -22,6 +22,26 @@ export abstract class AbstractService {
     }
 
     /**
+     * get element with id
+     * @param Id 
+     */
+    public getOne<T>(Id: string | number): Observable<T> {
+        return this.http.get<T>(`${environment.api}/${this.uri}/${Id}`);
+    }
+
+    /**
+     * get element with header set
+     */
+    public getOneWithHeader<T>(
+        Id: string | number, 
+        values: { 
+            [key: string]: any 
+        }): Observable<T> {
+        const options = { headers: new HttpHeaders(values) };
+        return this.http.get<T>(`${environment.api}/${this.uri}/${Id}`, options);
+    }
+
+    /**
      * getAll api function
      */
     public getAll<T>(): Observable<T[]> {

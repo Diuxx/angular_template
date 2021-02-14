@@ -28,6 +28,8 @@ export class PostComponent implements OnInit {
     // subscriptions
     this.subscribeToIoLikes();
     this.subscribeToIoUnLikes();
+    this.subscribeToPosts();
+    this.subscribeToPostDelete();
   }
 
   /**
@@ -47,26 +49,78 @@ export class PostComponent implements OnInit {
   }
 
   /**
+   * broadcast post to others
+   * @param post the post
+   */
+  public broadcastPost(post: Post): void {
+    this.ioService.sendPostInformation(post);
+  }
+
+  /**
+   * 
+   * @param post boadcast post  deletion
+   */
+  public broadcastDeleted(post: Post): void {
+    this.ioService.sendPostDeleteInformation(post);
+  }
+
+  /**
    * Refresh posts list
    */
-  public refeshPostList(): void {
+  public refeshPostList(post?: Post): void {
     // hide dialog
     if (this.postDialog) {
       this.postDialog = false;
     }
+
+    if (post) {
+      this.ioService.sendPostInformation(post);
+    } else {
+      this.queryPosts();
+    }
+  }
+
+  /**
+   * query posts to api
+   */
+  private queryPosts(): void {
     // reload data
     this.postService.getAllWithHeader<Post>(
       { 'userData': JSON.stringify(this.authService.getUserData()) }
       ).subscribe(posts => {
         this.posts = posts.sort((a, b) => new Date(a.UpdatedAt).getTime() - new Date(b.UpdatedAt).getTime());;
         this.posts.reverse();
-        console.log('posts', this.posts);
+        console.log('posts', posts);
         this.cd.markForCheck();
       },
       err => {
         console.log('get all posts error.', err);
       }
     );
+  }
+
+  /**
+   * Subscribe to deleted posts
+   */
+  private subscribeToPostDelete(): void {
+    this.ioService.getPostDelete()
+    .subscribe((post: Post) => {
+      const index = this.posts.findIndex(p => p.Id === post.Id);
+      this.posts.splice(index, 1);
+      this.cd.markForCheck();
+    });
+  }
+
+  /**
+   * Subscribe to posts
+   */
+  private subscribeToPosts(): void {
+    this.ioService.getPost()
+    .subscribe((post: Post) => {
+      post.likes = 0;
+      this.posts.unshift(post);
+      this.cd.markForCheck();
+    });
   }
 
   /**

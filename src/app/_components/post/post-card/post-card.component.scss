@@ -5,8 +5,22 @@
     justify-content: center;
 }
 
+.post-navigation {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.p-button.p-button-danger.delete-button {
+    width: 18px;
+    height: 8px;
+    display: none;
+    .pi {
+        font-size: 0.4em;
+    }
+}
+
 .add-like {
-    // background: url("");
     background-image: url(../../../../assets/images/add-like.svg);
     background-size: contain;
     width: 20px;
@@ -42,10 +56,14 @@
     flex-direction: column;
     width: fit-content;
     justify-content: center;
+    position: relative;
     gap: 5px;
     box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
     border-radius: 3px;
     padding: 5px;
+    &:hover .p-button.p-button-danger.delete-button {
+        display: inline-flex;
+    }
 }
 
 .post .header {

@@ -2,6 +2,8 @@ import { Injectable, NgZone } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { UserService } from 'src/app/_services/user.service';
 import { User } from '../intefaces/User';
 
 @Injectable({
@@ -34,7 +36,8 @@ export class AuthService {
     public afs: AngularFirestore,   // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth 
     public router: Router,  
-    public ngZone: NgZone // NgZone service to remove outside scope warning
+    public ngZone: NgZone, // NgZone service to remove outside scope warning
+    private userService: UserService
   ) {
     this._hasLoginErr = false;
     /* Saving user data in localstorage when 
@@ -42,11 +45,22 @@ export class AuthService {
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.userData = user;
-        localStorage.setItem('user', JSON.stringify(this.userData));
-        JSON.parse(localStorage.getItem('user'));
+
+        this.getFromDbUserInfo(
+          user.uid,
+          { 'userData': JSON.stringify(this.userData) })
+          .subscribe(u => {
+            localStorage.setItem('user', JSON.stringify(this.userData));
+            let cacestdegeu: any = JSON.parse(localStorage.getItem('user'));
+            cacestdegeu.displayName = u.displayName;
+            localStorage.setItem('user', JSON.stringify(cacestdegeu));
+          }, err => {
+            // not db registered user
+            localStorage.setItem('user', JSON.stringify(this.userData));
+          }
+        );
       } else {
         localStorage.setItem('user', null);
-        JSON.parse(localStorage.getItem('user'));
       }
     });
   }
@@ -56,13 +70,24 @@ export class AuthService {
     return user;
   }
 
+  private getFromDbUserInfo(uid: string, userdata: any): Observable<User> {
+    return this.userService.getOneWithHeader<User>(uid, userdata);
+  }
+
   // Sign in with email/password
   SignIn(email: string, password: string) {
     return this.afAuth.signInWithEmailAndPassword(email, password)
       .then((result) => {
-        this.SetUserData(result.user);
-        this.ngZone.run(() => {
-          window.location.reload();
+        let userUID: string = result.user.uid;
+        let userdata: any = { 'userData': JSON.stringify(result.user) };
+        this.userService.getOneWithHeader<User>(userUID, userdata)
+        .subscribe(u => {
+          this.SetUserData(result.user, u.displayName);
+          this.ngZone.run(() => {
+            window.location.reload();
+          });
+        }, err => {
+          console.log(err);
         });
       }).catch((error) => {
         this._hasLoginErr = true;
@@ -71,16 +96,31 @@ export class AuthService {
   }
 
   // Sign up with email/password
-  SignUp(email, password) {
+  SignUp(email, password, displayName: string) {
+    console.log('displayName', displayName)
     return this.afAuth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
         /* Call the SendVerificaitonMail() function when new user sign 
         up and returns promise */
         // this.SendVerificationMail();
-        this.SetUserData(result.user);
-        this.ngZone.run(() => {
-          window.location.reload();
-        });
+        this.SetUserData(result.user, displayName);
+
+        let userdata: any = {
+          uid: result.user.uid,
+          displayName: displayName,
+        }
+
+        this.userService.postWithHeader<User>(
+          userdata, 
+          { 'userData': JSON.stringify(result.user) }).subscribe(u => {
+            console.log('user has been registered in database');
+            this.ngZone.run(() => {
+              window.location.reload();
+            });
+          }, err => {
+            console.log(err);
+          }
+        );
       }).catch((error) => {
         console.log('err', error);
         this._hasRegisterErr = true;
@@ -107,12 +147,12 @@ export class AuthService {
   /* Setting up user data when sign in with username/password, 
   sign up with username/password and sign in with social auth  
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
-  SetUserData(user: any) {
+  SetUserData(user: any, alternativeDisplayName?: string): Promise<void> {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
     const userData: User = {
       uid: user.uid,
       email: user.email,
-      displayName: user.displayName,
+      displayName: alternativeDisplayName ? alternativeDisplayName : user.displayName,
       photoURL: user.photoURL,
       emailVerified: user.emailVerified
     }

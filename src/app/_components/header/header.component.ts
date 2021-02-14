@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
+import { User } from 'src/app/shared/intefaces/User';
 import { AuthService } from 'src/app/shared/services/Auth.service';
 
 @Component({
@@ -41,5 +42,9 @@ export class HeaderComponent implements OnInit {
       this.signInDisplay = false;
     }
     this.signUpDisplay = true;
+  }
+
+  public getUserData(): User {
+    return this.authService.getUserData();
   }
 }

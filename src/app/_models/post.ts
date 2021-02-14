@@ -6,5 +6,7 @@ export class Post {
    likes: number;
    didILikeIt: string;
    CreatedAt: Date;
-   UpdatedAt: Date; 
+   UpdatedAt: Date;
+   CreatedBy: string;
+   UserDisplayName: string;
 }

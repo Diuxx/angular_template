@@ -33,6 +33,21 @@ export class SocketIoService {
     }
 
     /**
+     * send post information
+     * @param post 
+     */
+    public sendPostInformation(post: Post): void {
+        this.socket.emit('post', post);
+    }
+
+    /**
+     * send informations
+     */
+    public sendPostDeleteInformation(post: Post): void {
+        this.socket.emit('post-delete', post);
+    }
+
+    /**
      * Gett likes observable
      */
     public getLikes = () => {
@@ -49,6 +64,28 @@ export class SocketIoService {
     public getUnLikes = () => {
         return new Observable(observer => {
             this.socket.on('unlike', (post: Post) => {
+                observer.next(post);
+            });
+        });
+    }
+
+    /**
+     * Get post observable
+     */
+    public getPost = () => {
+        return new Observable(observer => {
+            this.socket.on('post', (post: Post) => {
+                observer.next(post);
+            });
+        });
+    }
+
+    /**
+     * Get deleted post
+     */
+    public getPostDelete = () => {
+        return new Observable(observer => {
+            this.socket.on('post-delete', (post: Post) => {
                 observer.next(post);
             });
         });

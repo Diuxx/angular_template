@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/shared/services/Auth.service';
 import { Like } from 'src/app/_models/like';
 import { Post } from 'src/app/_models/post';
 import { LikeService } from 'src/app/_services/like.service';
+import { PostService } from 'src/app/_services/post.service';
 
 @Component({
   selector: 'app-post-card',
@@ -17,13 +18,16 @@ export class PostCardComponent implements OnInit {
 
   // variables
   private userdata: any = null;
+  public deleteButtonDisplay: boolean = false;
 
   // output
   @Output() liked = new EventEmitter<Post>();
   @Output() unliked = new EventEmitter<Post>();
+  @Output() deleted = new EventEmitter<Post>();
 
   constructor(
     private likeService: LikeService,
+    private postService: PostService,
     private authService: AuthService,
   ) { }
 
@@ -31,6 +35,26 @@ export class PostCardComponent implements OnInit {
     this.userdata = { 
       'userData': JSON.stringify(this.authService.getUserData()) 
     };
+  }
+
+  public isMyPost(): boolean {
+    return this.post.CreatedBy === this.authService.getUserData().uid
+  }
+
+  /**
+   * 
+   */
+  public deletePost(): void {
+    console.log('delete post');
+    this.postService.deleteWithHeader(this.post.Id, this.userdata)
+    .subscribe(p => {
+      if(this.deleted.observers.length > 0)
+      {
+        this.deleted.emit(this.post);
+      }
+    }, err => {
+      console.log(err);
+    });
   }
 
   /**
